@@ -3,12 +3,17 @@
     <ul class="pagination" :class="classes">
       <li :class="{disabled:value<=1||disabled}" v-if="boundaryLinks">
         <a href="#" role="button" aria-label="First" @click.prevent="onPageChange(1)">
-          <span aria-hidden="true">&laquo;</span>
+          <span aria-hidden="true">
+            <i :class="prevIcon"></i>
+          </span>
         </a>
       </li>
       <li :class="{disabled:value<= 1||disabled}" v-if="directionLinks">
         <a href="#" role="button" aria-label="Previous" @click.prevent="onPageChange(value-1)">
-          <span aria-hidden="true">&lsaquo;</span>
+          <span aria-hidden="true">
+            <i :class="prevIcon"></i>
+            <span class="nav-label">{{ prevText }}</span>
+          </span>
         </a>
       </li>
       <li :class="{disabled:disabled}" v-if="sliceStart>0">
@@ -26,12 +31,17 @@
       </li>
       <li :class="{disabled:value>=totalPage||disabled}" v-if="directionLinks">
         <a href="#" role="button" aria-label="Next" @click.prevent="onPageChange(value+1)">
-          <span aria-hidden="true">&rsaquo;</span>
+          <span aria-hidden="true">
+            <span class="nav-label">{{ nextText }}</span>
+            <i :class="nextIcon"></i>
+          </span>
         </a>
       </li>
       <li :class="{disabled:value>=totalPage||disabled}" v-if="boundaryLinks">
         <a href="#" role="button" aria-label="Last" @click.prevent="onPageChange(totalPage)">
-          <span aria-hidden="true">&raquo;</span>
+          <span aria-hidden="true">
+            <i :class="nextIcon"></i>
+          </span>
         </a>
       </li>
     </ul>
@@ -67,6 +77,22 @@
         type: Number,
         default: 5,
         validator: v => v >= 0
+      },
+      prevText: {
+        type: String,
+        default: 'Previous'
+      },
+      prevIcon: {
+        type: String,
+        default: '&laquo;'
+      },
+      nextText: {
+        type: String,
+        default: 'Next'
+      },
+      nextIcon: {
+        type: String,
+        default: '&raquo;'
       },
       disabled: Boolean
     },
